@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarServis
+namespace CarService
 {
     class Order
     {
-        public int Id { get; set; }
+        public int Id {get; set;}
         public String Name { get; set; }
         public String Surname { get; set; }
         public String PhoneNumber { get; set; }

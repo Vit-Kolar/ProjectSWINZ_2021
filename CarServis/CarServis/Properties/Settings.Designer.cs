@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CarServis.Properties
+namespace CarService.Properties
 {
 
 

@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarServis.DAL
+namespace CarService.DAL
 {
     class DatabaseContext : DbContext
     {
-        public DatabaseContext(): base("ServisOrders"){
+        public DatabaseContext(): base("ServiceOrders"){
 
         }
         public DbSet<Order> Order { get; set; }
