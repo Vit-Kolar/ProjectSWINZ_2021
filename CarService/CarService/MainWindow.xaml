@@ -1,0 +1,61 @@
+﻿<Window x:Class="CarService.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:local="clr-namespace:CarService"
+        mc:Ignorable="d"
+        Title="CarService" Height="550" Width="850" Icon="WrenchIcon.png">
+    <Grid >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Column="1" Grid.Row="1" FontSize="20">
+            Datum:
+         </TextBlock>
+        <DatePicker Grid.Column="2" Grid.Row="1"/>
+        <TextBlock Grid.Column="1" Grid.Row="2" FontSize="20">
+            Čas obědnávky:
+        </TextBlock>
+        <TextBox Grid.Column="2" Grid.Row="2" x:Name="OrderTime"> </TextBox>
+        <TextBlock Grid.Column="1" Grid.Row="3" FontSize="20">
+            Jméno:
+        </TextBlock>
+        <TextBox Grid.Column="2" Grid.Row="3" x:Name="Name"></TextBox>
+        <TextBlock Grid.Column="1" Grid.Row="4" FontSize="20">
+            Příjmění:
+        </TextBlock>
+        <TextBox Grid.Column="2" Grid.Row="4" x:Name="Surname"></TextBox>
+        <TextBlock Grid.Column="1" Grid.Row="5" FontSize="20">
+            Phone number:
+        </TextBlock>
+        <TextBox Grid.Column="2" Grid.Row="5" x:Name="PhoneNumber"></TextBox>
+        <TextBlock Grid.Column="1" Grid.Row="6" FontSize="20">
+            Email:
+        </TextBlock>
+        <TextBox Grid.Column="2" Grid.Row="6" x:Name="Email"></TextBox>
+        <TextBlock Grid.Column="1" Grid.Row="7" FontSize="20">
+            Description:
+        </TextBlock>
+        <TextBox Grid.Column="2" Grid.Row="7" x:Name="Description"></TextBox>
+
+    </Grid>
+
+</Window>

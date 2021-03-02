@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CarService.DAL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,5 +25,18 @@ namespace CarService
         {
             InitializeComponent();
         }
+
+        /*private void SubmitButton_Click(object sender, RoutedEventArgs e)
+        {
+            DatabaseContext db = new DAL.DatabaseContext();
+            Order order = new Order();
+            order.Name = "Vít";
+            order.Surname = "kolář";
+            order.PhoneNumber = "000000000";
+            order.Email = "email@neco.eu";
+            order.OrderDateTime = DateTime.Now;
+            db.Order.Add(order);
+            db.SaveChanges();
+        }*/
     }
 }
