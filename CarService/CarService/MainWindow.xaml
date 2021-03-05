@@ -12,6 +12,8 @@
             <ColumnDefinition Width="20"/>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="20"/>
         </Grid.ColumnDefinitions>
@@ -24,38 +26,39 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Column="1" Grid.Row="1" FontSize="20">
-            Datum:
-         </TextBlock>
-        <DatePicker Grid.Column="2" Grid.Row="1"/>
+        <TextBlock Grid.Column="1" Grid.Row="1" FontSize="20" Text=" Datum:" />
+        <DatePicker Grid.Column="2" Grid.Row="1" x:Name="DatePicker"  SelectedDateChanged="DatePicker_SelectedDateChanged"/>
         <TextBlock Grid.Column="1" Grid.Row="2" FontSize="20">
             Čas obědnávky:
         </TextBlock>
-        <TextBox Grid.Column="2" Grid.Row="2" x:Name="OrderTime"> </TextBox>
-        <TextBlock Grid.Column="1" Grid.Row="3" FontSize="20">
+        <ComboBox Grid.Column="2" Grid.Row="2" x:Name="OrderTime"/>
+        <ListBox x:Name="OrdersBox" Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+        <TextBlock Grid.Column="1" Grid.Row="3" FontSize="20" Grid.ColumnSpan="4">
             Jméno:
         </TextBlock>
-        <TextBox Grid.Column="2" Grid.Row="3" x:Name="Name"></TextBox>
-        <TextBlock Grid.Column="1" Grid.Row="4" FontSize="20">
+        <TextBox Grid.Column="2" Grid.Row="3" x:Name="NameTextBox"></TextBox>
+        <TextBlock Grid.Column="1" Grid.Row="4" FontSize="20" Grid.ColumnSpan="4">
             Příjmění:
         </TextBlock>
-        <TextBox Grid.Column="2" Grid.Row="4" x:Name="Surname"></TextBox>
-        <TextBlock Grid.Column="1" Grid.Row="5" FontSize="20">
-            Phone number:
+        <TextBox Grid.Column="2" Grid.Row="4" x:Name="SurnameTextBox"></TextBox>
+        <TextBlock Grid.Column="1" Grid.Row="5" FontSize="20" Grid.ColumnSpan="4">
+            Telefonní číslo:
         </TextBlock>
-        <TextBox Grid.Column="2" Grid.Row="5" x:Name="PhoneNumber"></TextBox>
-        <TextBlock Grid.Column="1" Grid.Row="6" FontSize="20">
+        <TextBox Grid.Column="2" Grid.Row="5" x:Name="PhoneNumberTextBox"></TextBox>
+        <TextBlock Grid.Column="1" Grid.Row="6" FontSize="20" Grid.ColumnSpan="4">
             Email:
         </TextBlock>
-        <TextBox Grid.Column="2" Grid.Row="6" x:Name="Email"></TextBox>
-        <TextBlock Grid.Column="1" Grid.Row="7" FontSize="20">
-            Description:
+        <TextBox Grid.Column="2" Grid.Row="6" x:Name="EmailTextBox"></TextBox>
+        <TextBlock Grid.Column="1" Grid.Row="7" FontSize="20" Grid.ColumnSpan="4">
+            Podrobnosti:
         </TextBlock>
-        <TextBox Grid.Column="2" Grid.Row="7" x:Name="Description"></TextBox>
-
+        <TextBox Grid.Column="2" Grid.Row="7" x:Name="DescriptionTextBox"></TextBox>
+        <Button x:Name="Submit" Content="Zapsat"  Grid.Column="1" Grid.Row="8" FontSize="22" Click="Submit_Click" />
+        <Button x:Name="ClearForm" Content="Zrušit"  Grid.Column="2" Grid.Row="8" FontSize="22" Click="ClearForm_Click" />
     </Grid>
 
 </Window>
