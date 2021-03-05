@@ -27,12 +27,12 @@ namespace CarService
     {
         DatabaseContext db = new DAL.DatabaseContext();
         private const int HourOnFirstIndex = 7;
+        private SelectedOrders selectedOrders;
         public MainWindow()
         {
             InitializeComponent();
             OrderTime.ItemsSource = new String[]{"7:00", "8:00" , "9:00" , "10:00" , "11:00" , "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00" };
-            
-            
+            OrdersBoxDisableAndMessage("Zadejte prosím datum a čas obědnávky.");
         }
 
         private void Submit_Click(object sender, RoutedEventArgs e)
@@ -48,28 +48,39 @@ namespace CarService
             ClearInputs();
         }
 
-        private void DatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        public void DatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            /*if (DatePicker.SelectedDate.Value != null)
-                Console.WriteLine("Hello world!");
+            if (DatePicker.SelectedDate.Value != null && OrderTime.SelectedIndex != -1)
             {
-                List<Order> orders = new List<Order>();
-
-                //var rightData = from data in db.Order where data.OrderDateTime.Date == DatePicker.SelectedDate.Value.Date select data;
-                var rightData = db.Order.Where(d => DbFunctions.TruncateTime(d.OrderDateTime) == DateTime.Now.Date).Select(d => d);
-                String[] listData = { "test", "test", "test" };
-                foreach (var ld in listData)
-                {
-                    OrdersBox.Items.Add(ld);
-                }
-                
-                foreach (Order rd in rightData)
-                {
-                    Console.WriteLine(rd.Name + " " + rd.Surname);
-                }
-            }*/
+                selectedOrders = new SelectedOrders(DatePicker.SelectedDate.Value.AddHours(OrderTime.SelectedIndex + HourOnFirstIndex), db, this);
+            }
+            else
+            {
+                OrdersBoxDisableAndMessage("Zadejte prosím datum a čas obědnávky.");
+            }
         }
-        private void SaveNewOrder()
+        private void DisableOrdersBoxControls()
+        {
+            OrdersBox.Items.Clear();
+            OrdersBox.IsEnabled = false;
+            ShowSelectedOrderBt.IsEnabled = false;
+            EditSelectedOrderBt.IsEnabled = false;
+            DeleteSelectedOrderBt.IsEnabled = false;
+        }
+        public void EnableListboxControls()
+        {
+            OrdersBox.Items.Clear();
+            OrdersBox.IsEnabled = true;
+            ShowSelectedOrderBt.IsEnabled = true;
+            EditSelectedOrderBt.IsEnabled = true;
+            DeleteSelectedOrderBt.IsEnabled = true;
+        }
+         public void OrdersBoxDisableAndMessage(string message)
+        {
+            DisableOrdersBoxControls();
+            OrdersBox.Items.Add(message);
+        }
+            private void SaveNewOrder()
         {
             Order order = new Order();
             order.Name = NameTextBox.Text;
@@ -89,6 +100,19 @@ namespace CarService
             EmailTextBox.Text = "";
             DescriptionTextBox.Text = "";
 
+        }
+
+        private void OrderTime_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Console.WriteLine(DatePicker.SelectedDate.ToString());
+            if (DatePicker.SelectedDate != null && OrderTime.SelectedIndex != -1)
+            {
+                selectedOrders = new SelectedOrders(DatePicker.SelectedDate.Value.AddHours(OrderTime.SelectedIndex + HourOnFirstIndex), db, this);
+            }
+            else
+            {
+                OrdersBoxDisableAndMessage("Zadejte prosím datum a čas obědnávky.");
+            }
         }
     }
 }
