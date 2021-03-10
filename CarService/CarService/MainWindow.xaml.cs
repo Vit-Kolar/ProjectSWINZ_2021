@@ -33,6 +33,7 @@ namespace CarService
             InitializeComponent();
             OrderTime.ItemsSource = new String[]{"7:00", "8:00" , "9:00" , "10:00" , "11:00" , "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00" };
             OrdersBoxDisableAndMessage("Zadejte prosím datum a čas obědnávky.");
+            selectedOrders = new SelectedOrders( db, this);
         }
 
         private void Submit_Click(object sender, RoutedEventArgs e)
@@ -52,7 +53,7 @@ namespace CarService
         {
             if (DatePicker.SelectedDate.Value != null && OrderTime.SelectedIndex != -1)
             {
-                selectedOrders = new SelectedOrders(DatePicker.SelectedDate.Value.AddHours(OrderTime.SelectedIndex + HourOnFirstIndex), db, this);
+                selectedOrders.SetOrderBox(DatePicker.SelectedDate.Value.AddHours(OrderTime.SelectedIndex + HourOnFirstIndex));
             }
             else
             {
@@ -91,6 +92,7 @@ namespace CarService
             order.OrderDateTime = DatePicker.SelectedDate.Value.AddHours(OrderTime.SelectedIndex + HourOnFirstIndex);
             db.Order.Add(order);
             db.SaveChanges();
+            selectedOrders.SetOrderBox(order.OrderDateTime);
         }
         private void ClearInputs()
         {
@@ -107,12 +109,17 @@ namespace CarService
             Console.WriteLine(DatePicker.SelectedDate.ToString());
             if (DatePicker.SelectedDate != null && OrderTime.SelectedIndex != -1)
             {
-                selectedOrders = new SelectedOrders(DatePicker.SelectedDate.Value.AddHours(OrderTime.SelectedIndex + HourOnFirstIndex), db, this);
+                selectedOrders.SetOrderBox(DatePicker.SelectedDate.Value.AddHours(OrderTime.SelectedIndex + HourOnFirstIndex));
             }
             else
             {
                 OrdersBoxDisableAndMessage("Zadejte prosím datum a čas obědnávky.");
             }
+        }
+
+        private void DeleteSelectedOrderBt_Click(object sender, RoutedEventArgs e)
+        {
+            selectedOrders.DeleteSelectedOrder();
         }
     }
 }
