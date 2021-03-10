@@ -8,12 +8,13 @@
         mc:Ignorable="d"
         Title="CarService" Height="550" Width="850" Icon="WrenchIcon.png">
     <Grid >
+        
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="20"/>
         </Grid.ColumnDefinitions>
@@ -27,41 +28,37 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>            
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
+        
         <TextBlock Grid.Column="1" Grid.Row="1" FontSize="20" Text=" Datum:" />
         <DatePicker Grid.Column="2" Grid.Row="1" x:Name="DatePicker"  SelectedDateChanged="DatePicker_SelectedDateChanged"/>
-        <TextBlock Grid.Column="1" Grid.Row="2" FontSize="20">
-            Čas obědnávky:
-        </TextBlock>
+        
+        <TextBlock Grid.Column="1" Grid.Row="2" FontSize="20" Text=" Čas obědnávky:"/>
         <ComboBox Grid.Column="2" Grid.Row="2" x:Name="OrderTime" SelectionChanged="OrderTime_SelectionChanged"/>
-        <ListBox x:Name="OrdersBox" Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="2" MinWidth="150"/>
-        <TextBlock Grid.Column="1" Grid.Row="3" FontSize="20" Grid.ColumnSpan="4">
-            Jméno:
-        </TextBlock>
-        <TextBox Grid.Column="2" Grid.Row="3" x:Name="NameTextBox"></TextBox>
-        <TextBlock Grid.Column="1" Grid.Row="4" FontSize="20" Grid.ColumnSpan="4">
-            Příjmění:
-        </TextBlock>
-        <TextBox Grid.Column="2" Grid.Row="4" x:Name="SurnameTextBox"></TextBox>
-        <TextBlock Grid.Column="1" Grid.Row="5" FontSize="20" Grid.ColumnSpan="4">
-            Telefonní číslo:
-        </TextBlock>
-        <TextBox Grid.Column="2" Grid.Row="5" x:Name="PhoneNumberTextBox"></TextBox>
-        <TextBlock Grid.Column="1" Grid.Row="6" FontSize="20" Grid.ColumnSpan="4">
-            Email:
-        </TextBlock>
-        <TextBox Grid.Column="2" Grid.Row="6" x:Name="EmailTextBox"></TextBox>
-        <TextBlock Grid.Column="1" Grid.Row="7" FontSize="20" Grid.ColumnSpan="4">
-            Podrobnosti:
-        </TextBlock>
-        <TextBox Grid.Column="2" Grid.Row="7" x:Name="DescriptionTextBox"></TextBox>
-        <Button x:Name="Submit" Content="Zapsat"  Grid.Column="1" Grid.Row="8" FontSize="22" Click="Submit_Click" />
-        <Button x:Name="ClearForm" Content="Zrušit"  Grid.Column="2" Grid.Row="8" FontSize="22" Click="ClearForm_Click" />
-        <Button x:Name="ShowSelectedOrderBt" Content="Zobrazit" Grid.Column="5" Grid.Row="1"/>
-        <Button x:Name="EditSelectedOrderBt" Content="Upravit" Grid.Column="5" Grid.Row="2"/>
-        <Button x:Name="DeleteSelectedOrderBt" Content="Smazat" Grid.Column="5" Grid.Row="3"/>
+        <ListBox x:Name="OrdersBox" Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="3" Grid.RowSpan="3" MinWidth="250"/>
+
+        <TextBlock Grid.Column="1" Grid.Row="4" FontSize="20" Grid.ColumnSpan="4" Text="Jméno:" Margin="0,10,0,10"/>
+        <TextBox Grid.Column="2" Grid.Row="4" x:Name="NameTextBox" Grid.ColumnSpan="2" Padding="0,5,0,5" Margin="0,10,0,10" VerticalAlignment="Center"></TextBox>
+
+        <TextBlock Grid.Column="1" Grid.Row="5" FontSize="20" Grid.ColumnSpan="4" Text="Příjmění:" Margin="0,10,0,10"/>
+        <TextBox Grid.Column="2" Grid.Row="5" x:Name="SurnameTextBox" Grid.ColumnSpan="2" Padding="0,5,0,5" Margin="0,10,0,10" VerticalAlignment="Center"></TextBox>
+
+        <TextBlock Grid.Column="1" Grid.Row="6" FontSize="20" Grid.ColumnSpan="4" Text="Telefonní číslo:" Margin="0,10,0,10"/>
+        <TextBox Grid.Column="2" Grid.Row="6" x:Name="PhoneNumberTextBox" Grid.ColumnSpan="2" Padding="0,5,0,5" Margin="0,10,0,10" VerticalAlignment="Center"></TextBox>
+
+        <TextBlock Grid.Column="1" Grid.Row="7" FontSize="20" Grid.ColumnSpan="4" Text="Email:" Margin="0,10,0,10"/>
+        <TextBox Grid.Column="2" Grid.Row="7" x:Name="EmailTextBox" Grid.ColumnSpan="2" Padding="0,5,0,5" Margin="0,10,0,10" VerticalAlignment="Center"></TextBox>
+
+        <TextBlock Grid.Column="1" Grid.Row="8" FontSize="20" Grid.ColumnSpan="4" Text="Podrobnosti:" Margin="0,10,0,10"/>
+        <TextBox Grid.Column="2" Grid.Row="8" x:Name="DescriptionTextBox" Grid.ColumnSpan="4" Padding="0,5,0,5" Margin="0,10,0,10" VerticalAlignment="Center"></TextBox>
+        
+        <Button x:Name="Submit" Content="Zapsat"  Grid.Column="1" Grid.Row="9" FontSize="22" Click="Submit_Click" />
+        <Button x:Name="ClearForm" Content="Zrušit"  Grid.Column="2" Grid.Row="9" FontSize="22" Click="ClearForm_Click" />
+        <Button x:Name="ShowSelectedOrderBt" Content="Zobrazit" Grid.Column="3" Grid.Row="3"/>
+        <Button x:Name="EditSelectedOrderBt" Content="Upravit" Grid.Column="4" Grid.Row="3" RenderTransformOrigin="-2.104,1.648"/>
+        <Button x:Name="DeleteSelectedOrderBt" Content="Smazat" Grid.Column="5" Grid.Row="3" Click="DeleteSelectedOrderBt_Click"/>
         
 
     </Grid>
