@@ -57,7 +57,7 @@
         <Button x:Name="Submit" Content="Zapsat"  Grid.Column="1" Grid.Row="9" FontSize="22" Click="Submit_Click" />
         <Button x:Name="ClearForm" Content="Zrušit"  Grid.Column="2" Grid.Row="9" FontSize="22" Click="ClearForm_Click" />
         <Button x:Name="ShowSelectedOrderBt" Content="Zobrazit" Grid.Column="3" Grid.Row="3"/>
-        <Button x:Name="EditSelectedOrderBt" Content="Upravit" Grid.Column="4" Grid.Row="3" RenderTransformOrigin="-2.104,1.648"/>
+        <Button x:Name="EditSelectedOrderBt" Content="Upravit" Grid.Column="4" Grid.Row="3" RenderTransformOrigin="-2.104,1.648" Click="EditSelectedOrderBt_Click"/>
         <Button x:Name="DeleteSelectedOrderBt" Content="Smazat" Grid.Column="5" Grid.Row="3" Click="DeleteSelectedOrderBt_Click"/>
         
 

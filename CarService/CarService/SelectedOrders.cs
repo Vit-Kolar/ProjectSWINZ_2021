@@ -11,10 +11,12 @@ namespace CarService
 {
     class SelectedOrders
     {
-        MainWindow window;
-        DatabaseContext db;
+        private MainWindow window;
+        private DatabaseContext db;
         private List<Order> orders;
-        DateTime activeSelectionDate;
+        private DateTime activeSelectionDate;
+        
+
 
 
 
@@ -26,7 +28,7 @@ namespace CarService
             
                         
         }
-        public void SetOrderBox(DateTime selectionDate)
+        public void SetOrderBox(DateTime selectionDate, bool isExistingOrderToChange)
         {
             var query = db.Order.Where(d => d.OrderDateTime == selectionDate).Select(d => d);
             orders = query.ToList();
@@ -36,7 +38,10 @@ namespace CarService
             }
             else
             {
-                window.EnableListboxControls();
+                if (!isExistingOrderToChange)
+                {
+                    window.EnableListboxControls();
+                }               
                 foreach (Order order in orders)
                 {
                     window.OrdersBox.Items.Add(order.OrderDateTime.ToString() + " " + order.Name + " " + order.Surname);
@@ -45,6 +50,10 @@ namespace CarService
             }
             
         }
+        public void SetOrderBox(DateTime selectionDate)
+        {
+            SetOrderBox(selectionDate,false);
+        }            
         public void DeleteSelectedOrder()
         {
             if(window.OrdersBox.SelectedIndex != -1)
@@ -57,8 +66,19 @@ namespace CarService
                     SetOrderBox(activeSelectionDate);
                 }
             }
-            
-           
+        
+        }
+        public Order GetSelectedorder()
+        {
+            return orders[window.OrdersBox.SelectedIndex];
+        }
+
+        public void ChangeOrder(Order existingOrderToChange, Order changedOrder)
+        {
+            changedOrder.Id = existingOrderToChange.Id;
+            var entity = db.Order.Find(existingOrderToChange.Id);
+            db.Entry(entity).CurrentValues.SetValues(changedOrder);
+            db.SaveChanges();
         }
     }
 }

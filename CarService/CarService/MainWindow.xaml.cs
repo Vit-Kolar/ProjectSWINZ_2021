@@ -28,6 +28,9 @@ namespace CarService
         DatabaseContext db = new DAL.DatabaseContext();
         private const int HourOnFirstIndex = 7;
         private SelectedOrders selectedOrders;
+        private bool changingExistingOrder = false;
+        private Order existingOrderToChange; 
+
         public MainWindow()
         {
             InitializeComponent();
@@ -47,6 +50,7 @@ namespace CarService
         private void ClearForm_Click(object sender, RoutedEventArgs e)
         {
             ClearInputs();
+            changingExistingOrder = false;
         }
 
         public void DatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
@@ -76,12 +80,12 @@ namespace CarService
             EditSelectedOrderBt.IsEnabled = true;
             DeleteSelectedOrderBt.IsEnabled = true;
         }
-         public void OrdersBoxDisableAndMessage(string message)
+        public void OrdersBoxDisableAndMessage(string message)
         {
             DisableOrdersBoxControls();
             OrdersBox.Items.Add(message);
         }
-            private void SaveNewOrder()
+        private void SaveNewOrder()
         {
             Order order = new Order();
             order.Name = NameTextBox.Text;
@@ -90,10 +94,20 @@ namespace CarService
             order.Email = EmailTextBox.Text;
             order.Description = DescriptionTextBox.Text;
             order.OrderDateTime = DatePicker.SelectedDate.Value.AddHours(OrderTime.SelectedIndex + HourOnFirstIndex);
-            db.Order.Add(order);
-            db.SaveChanges();
+            if (changingExistingOrder)
+            {
+                selectedOrders.ChangeOrder(existingOrderToChange,order);
+                changingExistingOrder = false;
+            }
+            else
+            {         
+                db.Order.Add(order);
+                db.SaveChanges();
+                
+            }
             selectedOrders.SetOrderBox(order.OrderDateTime);
         }
+           
         private void ClearInputs()
         {
             NameTextBox.Text = "";
@@ -120,6 +134,21 @@ namespace CarService
         private void DeleteSelectedOrderBt_Click(object sender, RoutedEventArgs e)
         {
             selectedOrders.DeleteSelectedOrder();
+        }
+
+        private void EditSelectedOrderBt_Click(object sender, RoutedEventArgs e)
+        {
+            if (OrdersBox.SelectedIndex != -1)
+            {
+                existingOrderToChange = selectedOrders.GetSelectedorder();
+                NameTextBox.Text = existingOrderToChange.Name;
+                SurnameTextBox.Text = existingOrderToChange.Surname;
+                PhoneNumberTextBox.Text = existingOrderToChange.PhoneNumber;
+                EmailTextBox.Text = existingOrderToChange.Email;
+                DescriptionTextBox.Text = existingOrderToChange.Description;
+                changingExistingOrder = true;
+                OrdersBoxDisableAndMessage("Nyní můžete upravit obědnávku.");
+            }
         }
     }
 }
